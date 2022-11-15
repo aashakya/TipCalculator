@@ -10,26 +10,28 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import androidx.appcompat.widget.Toolbar;
 
 import java.text.NumberFormat;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements TextWatcher, SeekBar.OnSeekBarChangeListener {
-
     private double billAmount, percent;
     private TextView amountTextView, percentTextView, tipTextView, totalTextView;
     private EditText amountEditText;
     private SeekBar percentSeekBar;
 
     NumberFormat currencyFormat, percentFormat;
+    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+        setSupportActionBar(toolbar);
     }
 
     void init(){
+        toolbar = (Toolbar) findViewById(R.id.toolbar); // connecting toolbar by finding view
         currencyFormat = NumberFormat.getCurrencyInstance();
         percentFormat = NumberFormat.getPercentInstance();
         // inserting value to the defined variables
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Seek
         // hide the soft keyboard from the window
         imm.hideSoftInputFromWindow(amountTextView.getWindowToken(), 0);
     }
+
 
     @Override
     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
